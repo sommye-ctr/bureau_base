@@ -1,6 +1,7 @@
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
+import 'package:bureau_base/screens/residence.dart';
 import 'package:bureau_base/screens/signup.dart';
 import 'package:bureau_base/screens/user_info_form.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,10 @@ class MyApp extends StatelessWidget {
       case UserInfoScreen.route:
         return MaterialPageRoute(
           builder: (context) => const UserInfoScreen(),
+        );
+      case ResidenceInfoScreen.route:
+        return MaterialPageRoute(
+          builder: (context) => const ResidenceInfoScreen(),
         );
       default:
         return null;

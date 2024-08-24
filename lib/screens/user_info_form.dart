@@ -1,6 +1,7 @@
 import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
+import 'package:bureau_base/screens/residence.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -130,7 +131,15 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 FButton(
                   label: const Text(Strings.proceed),
                   onPress: () {
-                    _formKey.currentState?.validate();
+                    if (_formKey.currentState != null &&
+                        _formKey.currentState!.validate() &&
+                        userDob != null) {
+                      Navigator.pushNamed(context, ResidenceInfoScreen.route);
+                      return;
+                    }
+                    if (userDob == null) {
+                      //TODO DO HERE
+                    }
                   },
                 )
               ],
