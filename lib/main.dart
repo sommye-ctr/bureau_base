@@ -1,6 +1,8 @@
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/home.dart';
+import 'package:bureau_base/screens/login.dart';
+import 'package:bureau_base/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: _handleRoutes,
       builder: (context, child) => FTheme(
         data: theme.copyWith(
           cardStyle: theme.cardStyle.copyWith(
@@ -50,8 +53,26 @@ class MyApp extends StatelessWidget {
       home: const FScaffold(
         contentPad: false,
         //content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),  //TODO -DO THIS
-        content: HomeScreen(),
+        content: SignupScreen(),
       ),
     );
+  }
+
+  Route<dynamic>? _handleRoutes(settings) {
+    switch (settings.name) {
+      case SignupScreen.route:
+        return MaterialPageRoute(
+          builder: (context) => const SignupScreen(),
+        );
+
+      case LoginScreen.route:
+        return MaterialPageRoute(
+          builder: (context) => LoginScreen(
+            phone: settings.value,
+          ),
+        );
+      default:
+        return null;
+    }
   }
 }
