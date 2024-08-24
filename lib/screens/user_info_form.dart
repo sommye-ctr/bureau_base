@@ -50,7 +50,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           if (value == null ||
                               value.isEmpty ||
                               value.length < 2) {
-                            return "First Name must have atleast 2 characters";
+                            return Strings.firstNameError;
                           }
                           return null;
                         },
@@ -68,7 +68,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           if (value == null ||
                               value.isEmpty ||
                               value.length < 2) {
-                            return "Last Name must have atleast 2 characters";
+                            return Strings.lastNameError;
                           }
                           return null;
                         },

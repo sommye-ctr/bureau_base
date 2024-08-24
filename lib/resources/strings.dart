@@ -25,4 +25,8 @@ class Strings {
   static const String dob = "Date of Birth";
   static const String lorem = "Lorem";
   static const String ipsum = "Ipsum";
+  static const String firstNameError =
+      "First Name must have atleast 2 characters";
+  static const String lastNameError =
+      "Last Name must have atleast 2 characters";
 }
