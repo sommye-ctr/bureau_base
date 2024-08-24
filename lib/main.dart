@@ -1,7 +1,6 @@
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/home.dart';
-import 'package:bureau_base/screens/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -24,22 +23,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = FThemeData.inherit(
+      colorScheme: FThemes.blue.light.colorScheme.copyWith(
+        primary: Style.primaryColor,
+      ),
+      typography: FThemes.blue.light.typography.copyWith(
+        defaultFontFamily: 'Roboto',
+      ),
+      style: FStyle(
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) => FTheme(
-        data: FThemeData.inherit(
-          colorScheme: FThemes.blue.light.colorScheme.copyWith(
-            primary: Style.primaryColor,
-          ),
-          typography: FThemes.blue.light.typography.copyWith(
-            defaultFontFamily: 'Roboto',
+        data: theme.copyWith(
+          cardStyle: theme.cardStyle.copyWith(
+            decoration: theme.cardStyle.decoration.copyWith(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         child: child!,
       ),
-      home: FScaffold(
+      home: const FScaffold(
         contentPad: false,
-        content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),
+        //content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),  //TODO -DO THIS
+        content: HomeScreen(),
       ),
     );
   }
