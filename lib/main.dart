@@ -1,4 +1,4 @@
-import 'package:bureau_base/screens/onboard.dart';
+import 'package:bureau_base/resources/style.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -12,12 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       builder: (context, child) => FTheme(
-        data: FThemes.blue.light,
+        data: FThemeData.inherit(
+          colorScheme: FThemes.blue.light.colorScheme.copyWith(
+            primary: Style.primaryColor,
+          ),
+          typography: FThemes.blue.light.typography.copyWith(
+            defaultFontFamily: 'Roboto',
+          ),
+        ),
         child: child!,
       ),
       home: const FScaffold(
-        content: OnBoardScreen(),
+        contentPad: false,
+        content: Text("data"),
       ),
     );
   }
