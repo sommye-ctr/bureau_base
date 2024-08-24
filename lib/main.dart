@@ -1,7 +1,6 @@
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
-import 'package:bureau_base/screens/home.dart';
-import 'package:bureau_base/screens/login.dart';
+import 'package:bureau_base/screens/otp_verification.dart';
 import 'package:bureau_base/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -64,11 +63,10 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(
           builder: (context) => const SignupScreen(),
         );
-
-      case LoginScreen.route:
+      case OtpVerificationScreen.route:
         return MaterialPageRoute(
-          builder: (context) => LoginScreen(
-            phone: settings.value,
+          builder: (context) => OtpVerificationScreen(
+            phone: settings.arguments,
           ),
         );
       default:
