@@ -1,13 +1,24 @@
 import 'package:bureau_base/resources/style.dart';
+import 'package:bureau_base/respository/local_repository.dart';
+import 'package:bureau_base/screens/home.dart';
+import 'package:bureau_base/screens/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  bool onBoarding = await LocalRepository().isOnBoardingDone();
+
+  runApp(MyApp(
+    onBoardingDone: onBoarding,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool onBoardingDone;
+  const MyApp({
+    super.key,
+    required this.onBoardingDone,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         child: child!,
       ),
-      home: const FScaffold(
+      home: FScaffold(
         contentPad: false,
-        content: Text("data"),
+        content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),
       ),
     );
   }
