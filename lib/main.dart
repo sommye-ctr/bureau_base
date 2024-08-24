@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   final bool onBoardingDone;
   const MyApp({
     super.key,
-    required this.onBoardingDone,
+    this.onBoardingDone = false,
   });
 
   @override
