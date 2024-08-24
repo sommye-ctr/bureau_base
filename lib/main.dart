@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   bool onBoarding = await LocalRepository().isOnBoardingDone();
 
   runApp(MyApp(

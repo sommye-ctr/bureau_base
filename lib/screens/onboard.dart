@@ -1,3 +1,5 @@
+import 'package:bureau_base/components/onboarding_widget.dart';
+import 'package:bureau_base/resources/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 
@@ -8,13 +10,13 @@ class OnBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Onboarding(
-      swipeableBody: [
-        _buildPage1(),
+      swipeableBody: const [
+        OnboardingWidget(
+          title: "Find Jobs",
+          subtitle: "Find job vacancies in your hometown by various employers.",
+          image: Assets.findJobs,
+        ),
       ],
     );
-  }
-
-  Widget _buildPage1() {
-    return Container();
   }
 }
