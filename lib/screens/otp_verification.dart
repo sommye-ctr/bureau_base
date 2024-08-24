@@ -5,6 +5,7 @@ import 'package:bureau_base/resources/assets.dart';
 import 'package:bureau_base/resources/constants.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
+import 'package:bureau_base/screens/user_info_form.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -75,7 +76,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         children: [
           SvgPicture.asset(
             Assets.verifyOtp,
-            height: ScreenSize.getPercentOfHeight(context, 0.6),
+            height: ScreenSize.getPercentOfHeight(context, 0.5),
           ),
           const Spacing(),
           Expanded(
@@ -89,12 +90,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       Text(
                         Strings.verificationCode,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: context.theme.typography.xl4,
                       ),
-                      const Spacing(),
                       Text(
                         Strings.verificationHeading,
-                        style: Theme.of(context).textTheme.labelLarge,
+                        style: context.theme.typography.sm,
                       ),
                       const Spacing(
                         large: true,
@@ -128,7 +128,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         child: Center(
                           child: FButton(
                             label: const Text(Strings.proceed),
-                            onPress: () {},
+                            onPress: () {
+                              Navigator.pushNamed(
+                                  context, UserInfoScreen.route);
+                            },
                           ),
                         ),
                       )

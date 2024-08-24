@@ -11,6 +11,7 @@ class Spacing extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: large ? 32 : 8,
+      width: large ? 32 : 8,
     );
   }
 }

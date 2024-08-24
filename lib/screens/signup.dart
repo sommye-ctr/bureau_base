@@ -93,15 +93,17 @@ class _SignupScreenState extends State<SignupScreen> {
           const Spacing(
             large: true,
           ),
-          FButton(
-            onPress: () {
-              _proceed();
-            },
-            label: const Text(Strings.next),
-            suffix: FButtonIcon(
-              icon: FAssets.icons.chevronRight,
+          Hero(
+            tag: Strings.proceed,
+            child: Center(
+              child: FButton(
+                label: const Text(Strings.proceed),
+                onPress: () {
+                  _proceed();
+                },
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

@@ -14,4 +14,15 @@ class Strings {
   static const String verificationCode = "Verification Code";
   static const String verificationHeading =
       "We have sent the verification\ncode to your mobile number";
+
+  ///personal info
+  static const String personalInfo = "Personal Information";
+  static const String firstName = "First Name";
+  static const String lastName = "Last Name";
+  static const String male = "Male";
+  static const String female = "Female";
+  static const String others = "Others";
+  static const String dob = "Date of Birth";
+  static const String lorem = "Lorem";
+  static const String ipsum = "Ipsum";
 }
