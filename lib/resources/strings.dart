@@ -10,16 +10,14 @@ class Strings {
   ///signup
   static const String next = "Next";
   static const String getStarted = "Get Started";
-  static const String enterMobileToProceed =
-      "Enter your mobile number to proceed";
-  static const String mobileHint = "1234567890";
-  static const String mobileNo = "Mobile Number";
-  static const String mobileNumberError = "Enter a valid mobile number";
+  static const String enterEmailToProceed = "Enter your email to proceed";
+  static const String mailHint = "someone@gmail.com";
+  static const String emailError = "Enter a valid email";
 
   ///otp-verify
   static const String verificationCode = "Verification Code";
   static const String verificationHeading =
-      "We have sent the verification\ncode to your mobile number";
+      "We have sent the verification\ncode to your email address";
 
   ///personal info
   static const String personalInfo = "Personal Information";

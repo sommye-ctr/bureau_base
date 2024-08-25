@@ -3,6 +3,7 @@ import 'package:bureau_base/resources/assets.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
 import 'package:bureau_base/utils/screen_size.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:forui/forui.dart';
@@ -20,13 +21,12 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _controller = TextEditingController();
   bool _validated = true;
 
-  static bool _validatePhone(String phone) {
-    RegExp numeric = RegExp(r'^-?[0-9]+$');
-    return (phone.length == 10 && numeric.hasMatch(phone));
+  static bool _validateEmail(String email) {
+    return EmailValidator.validate(email);
   }
 
   void _proceed() async {
-    if (_validatePhone(_controller.text) == false) {
+    if (_validateEmail(_controller.text) == false) {
       _validated = false;
       setState(() {});
       return;
@@ -77,20 +77,17 @@ class _SignupScreenState extends State<SignupScreen> {
               style: context.theme.typography.xl4,
             ),
             Text(
-              Strings.enterMobileToProceed,
+              Strings.enterEmailToProceed,
               style: context.theme.typography.sm,
             ),
             const Spacing(
               large: true,
             ),
-            FTextField(
+            FTextField.email(
               enabled: true,
-              label: const Text(Strings.mobileNo),
-              hint: Strings.mobileHint,
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
+              hint: Strings.mailHint,
               controller: _controller,
-              error: _validated ? null : const Text(Strings.mobileNumberError),
+              error: _validated ? null : const Text(Strings.emailError),
             ),
             const Spacing(
               large: true,
