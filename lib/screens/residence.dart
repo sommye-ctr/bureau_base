@@ -86,7 +86,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
             key: _cityKey,
           ),
           const FDivider(),
-          _buildSkillsDropDown(),
+          _buildIndustryDropDown(),
           const Spacing(large: true),
           const FTextField(
             hint: Strings.yearsOfExperience,
@@ -105,7 +105,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
     );
   }
 
-  Widget _buildSkillsDropDown() {
+  Widget _buildIndustryDropDown() {
     final List<String> items = [
       "Plumbing",
       "Carpentry",
@@ -118,6 +118,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
       singleSelect: false,
       chipDecoration: const ChipDecoration(backgroundColor: Style.primaryColor),
       searchEnabled: true,
+      fieldDecoration: const FieldDecoration(hintText: "Select your industry"),
     );
   }
 
