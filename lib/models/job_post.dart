@@ -4,6 +4,7 @@ import 'package:bureau_base/models/employer.dart';
 import 'package:bureau_base/models/industry.dart';
 
 class JobPost {
+  final String title;
   final String description;
   final DateTime datePosted;
   final String image;
@@ -16,6 +17,7 @@ class JobPost {
   final String pincode;
   final bool isContactHidden;
   JobPost({
+    required this.title,
     required this.description,
     required this.datePosted,
     required this.image,
@@ -30,6 +32,7 @@ class JobPost {
   });
 
   JobPost copyWith({
+    String? title,
     String? description,
     DateTime? datePosted,
     String? image,
@@ -43,6 +46,7 @@ class JobPost {
     bool? isContactHidden,
   }) {
     return JobPost(
+      title: title ?? this.title,
       description: description ?? this.description,
       datePosted: datePosted ?? this.datePosted,
       image: image ?? this.image,
@@ -59,6 +63,7 @@ class JobPost {
 
   Map<String, dynamic> toMap() {
     return {
+      'title': title,
       'description': description,
       'datePosted': datePosted.millisecondsSinceEpoch,
       'image': image,
@@ -75,6 +80,7 @@ class JobPost {
 
   factory JobPost.fromMap(Map<String, dynamic> map) {
     return JobPost(
+      title: map['title'] ?? "",
       description: map['description'] ?? '',
       datePosted: DateTime.fromMillisecondsSinceEpoch(map['date_posted']),
       image: map['image'] ?? '',
@@ -96,7 +102,7 @@ class JobPost {
 
   @override
   String toString() {
-    return 'JobPost(description: $description, datePosted: $datePosted, image: $image, quotation: $quotation, employer: $employer, qualification: $qualification, industry: $industry, city: $city, state: $state, pincode: $pincode, isContactHidden: $isContactHidden)';
+    return 'JobPost(title: $title, description: $description, datePosted: $datePosted, image: $image, quotation: $quotation, employer: $employer, qualification: $qualification, industry: $industry, city: $city, state: $state, pincode: $pincode, isContactHidden: $isContactHidden)';
   }
 
   @override
@@ -104,6 +110,7 @@ class JobPost {
     if (identical(this, other)) return true;
 
     return other is JobPost &&
+        other.title == title &&
         other.description == description &&
         other.datePosted == datePosted &&
         other.image == image &&
@@ -119,7 +126,8 @@ class JobPost {
 
   @override
   int get hashCode {
-    return description.hashCode ^
+    return title.hashCode ^
+        description.hashCode ^
         datePosted.hashCode ^
         image.hashCode ^
         quotation.hashCode ^

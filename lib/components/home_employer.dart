@@ -1,12 +1,30 @@
 import 'package:bureau_base/components/spacing.dart';
+import 'package:bureau_base/models/job_post.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/screens/post_details.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-class HomeEmployer extends StatelessWidget {
+class HomeEmployer extends StatefulWidget {
   const HomeEmployer({super.key});
+
+  @override
+  State<HomeEmployer> createState() => _HomeEmployerState();
+}
+
+class _HomeEmployerState extends State<HomeEmployer> {
+  late List<JobPost> jobs;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchJobs();
+  }
+
+  void _fetchJobs() async {
+    // TODO - FETCH EMPLOYERS POSTS
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +41,25 @@ class HomeEmployer extends StatelessWidget {
         ),
         const Spacing(large: true),
         ListView.builder(
-          itemCount: 5,
+          itemCount: jobs.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-                title: const Text(
-                  "Lead Construction Worker",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                title: Text(
+                  jobs[index].title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                subtitle: const Text("Posted on 15 Mar 2024"),
+                subtitle: Text(
+                    "Posted on ${Style.getDayMonthYear(date: jobs[index].datePosted)}"),
                 tileColor: context.theme.cardStyle.decoration.color,
                 onTap: () {
-                  Navigator.pushNamed(context, PostDetailsScreen.route);
+                  Navigator.pushNamed(
+                    context,
+                    PostDetailsScreen.route,
+                    arguments: jobs[index],
+                  );
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius:

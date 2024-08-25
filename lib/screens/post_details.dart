@@ -1,14 +1,18 @@
 import 'package:bureau_base/components/rounded_image.dart';
 import 'package:bureau_base/components/spacing.dart';
+import 'package:bureau_base/models/job_post.dart';
 import 'package:bureau_base/resources/constants.dart';
 import 'package:bureau_base/resources/strings.dart';
+import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 class PostDetailsScreen extends StatelessWidget {
   static const String route = "/post-details";
-  const PostDetailsScreen({super.key});
+
+  final JobPost jobPost;
+  const PostDetailsScreen({required this.jobPost, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,9 @@ class PostDetailsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: FCard(
           child: FButton(
-            onPress: () {},
+            onPress: () {
+              //TODO - mark as interested
+            },
             label: const Text(
               Strings.markAsInterested,
             ),
@@ -33,8 +39,7 @@ class PostDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RoundedImage(
-                  image:
-                      "https://marketplace.canva.com/EAFioYQ67Mg/1/0/1131w/canva-beige-and-yellow-modern-job-vacancy-we-are-hiring-poster-9ODt6omvLJs.jpg",
+                  image: jobPost.image,
                   width: ScreenSize.getPercentOfWidth(context, 0.3),
                   ratio: Constants.postImageRatio,
                 ),
@@ -42,7 +47,9 @@ class PostDetailsScreen extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Retail Sales Managerr", //TODO SET MAX LENGTH TO 20
+                      jobPost.title.length > 20
+                          ? "${jobPost.title.substring(0, 20)}..."
+                          : jobPost.title,
                       style: context.theme.typography.xl2.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -50,11 +57,11 @@ class PostDetailsScreen extends StatelessWidget {
                     ),
                     const Spacing(),
                     Text(
-                      "XYZ Kirana Shop",
+                      jobPost.employer.companyName,
                       style: context.theme.typography.sm,
                     ),
                     Text(
-                      "Posted on 15 Aug 2024",
+                      "Posted on ${Style.getDayMonthYear(date: jobPost.datePosted)}",
                       style: context.theme.typography.sm,
                     )
                   ],
@@ -70,7 +77,7 @@ class PostDetailsScreen extends StatelessWidget {
                   children: [
                     FAssets.icons.notebookPen(height: 16),
                     const SizedBox(width: 4),
-                    const Text("Graduate"),
+                    Text(jobPost.qualification),
                   ],
                 )),
                 FBadge(
@@ -78,7 +85,7 @@ class PostDetailsScreen extends StatelessWidget {
                   children: [
                     FAssets.icons.indianRupee(height: 16),
                     const SizedBox(width: 4),
-                    const Text("15k - 30k"),
+                    Text(jobPost.quotation),
                   ],
                 )),
                 FBadge(
@@ -86,7 +93,7 @@ class PostDetailsScreen extends StatelessWidget {
                     children: [
                       FAssets.icons.pin(height: 16),
                       const SizedBox(width: 4),
-                      const Text("Roorkee"),
+                      Text(jobPost.city),
                     ],
                   ),
                 ),
@@ -95,13 +102,19 @@ class PostDetailsScreen extends StatelessWidget {
             const Spacing(large: true),
             FCard(
               title: const Text(Strings.description),
-              subtitle: Text("Lorem Ipsum " * 45),
+              subtitle: Text(jobPost.description),
             ),
             const Spacing(large: true),
             FCard(
               title: const Text(Strings.aboutEmployer),
-              subtitle: Text(
-                "Name - Somye Mahajan\nCompany - Stark Industries\nAddress - XYZ Road, abc street, pqr city, India\nMobile - 4543454534",
+              subtitle: Column(
+                children: [
+                  Text(
+                      "Name - ${jobPost.employer.user.firstName} ${jobPost.employer.user.lastName}"),
+                  Text("Company - ${jobPost.employer.companyName}"),
+                  Text("Address - ${jobPost.employer.address}"),
+                  Text("Email - ${jobPost.employer.user.email}")
+                ],
               ),
             ),
           ],

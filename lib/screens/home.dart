@@ -1,17 +1,32 @@
-import 'package:bureau_base/components/carousel_card.dart';
 import 'package:bureau_base/components/home_employee.dart';
 import 'package:bureau_base/components/home_employer.dart';
 import 'package:bureau_base/components/spacing.dart';
-import 'package:bureau_base/resources/strings.dart';
-import 'package:bureau_base/resources/style.dart';
-import 'package:bureau_base/screens/post_details.dart';
+import 'package:bureau_base/models/user.dart';
 import 'package:bureau_base/screens/settings.dart';
-import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  static const String route = "/home";
+  final int userId;
+  const HomeScreen({required this.userId, super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late User user;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUser();
+  }
+
+  void _fetchUser() async {
+    // TODO - fetches the user object
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +45,28 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       FAvatar.raw(
-                        child: const Text("SM"),
+                        child: Text(
+                            "${user.firstName.characters.first}${user.lastName.characters.first}"),
                       ),
                       const Spacing(),
                       Text(
-                        "Hello Somye",
+                        "Hello ${user.firstName} ${user.lastName}",
                         style: context.theme.typography.lg
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   IconButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, SettingsScreen.route),
-                      icon: FAssets.icons.settings())
+                    onPressed: () =>
+                        Navigator.pushNamed(context, SettingsScreen.route),
+                    icon: FAssets.icons.settings(),
+                  )
                 ],
               ),
             ),
             const Spacing(large: true),
-            const HomeEmployer(),
+            if (user.isEmployer) const HomeEmployer(),
+            if (user.isEmployee) const HomeEmployee(),
           ],
         ),
       ),

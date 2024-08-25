@@ -1,3 +1,4 @@
+import 'package:bureau_base/resources/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -19,5 +20,9 @@ class Style {
       timeInSecForIosWeb: 1,
       fontSize: 16.0,
     );
+  }
+
+  static String getDayMonthYear({required DateTime date}) {
+    return "${date.day} ${Constants.months[date.month - 1]} ${date.year}";
   }
 }

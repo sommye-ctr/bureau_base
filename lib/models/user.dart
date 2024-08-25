@@ -9,6 +9,8 @@ class User {
   final String city;
   final String state;
   final String pincode;
+  final bool isEmployee;
+  final bool isEmployer;
   User({
     required this.email,
     required this.firstName,
@@ -18,6 +20,8 @@ class User {
     required this.city,
     required this.state,
     required this.pincode,
+    required this.isEmployee,
+    required this.isEmployer,
   });
 
   User copyWith({
@@ -29,6 +33,8 @@ class User {
     String? city,
     String? state,
     String? pincode,
+    bool? isEmployee,
+    bool? isEmployer,
   }) {
     return User(
       email: email ?? this.email,
@@ -39,6 +45,8 @@ class User {
       city: city ?? this.city,
       state: state ?? this.state,
       pincode: pincode ?? this.pincode,
+      isEmployee: isEmployee ?? this.isEmployee,
+      isEmployer: isEmployer ?? this.isEmployer,
     );
   }
 
@@ -52,6 +60,8 @@ class User {
       'city': city,
       'state': state,
       'pincode': pincode,
+      'isEmployee': isEmployee,
+      'isEmployer': isEmployer,
     };
   }
 
@@ -65,6 +75,8 @@ class User {
       city: map['city'] ?? '',
       state: map['state'] ?? '',
       pincode: map['pincode'] ?? '',
+      isEmployee: map['is_employee'] ?? false,
+      isEmployer: map['is_employer'] ?? false,
     );
   }
 
@@ -74,7 +86,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(email: $email, firstName: $firstName, lastName: $lastName, profilePhoto: $profilePhoto, bio: $bio, city: $city, state: $state, pincode: $pincode)';
+    return 'User(email: $email, firstName: $firstName, lastName: $lastName, profilePhoto: $profilePhoto, bio: $bio, city: $city, state: $state, pincode: $pincode, isEmployee: $isEmployee, isEmployer: $isEmployer)';
   }
 
   @override
@@ -89,7 +101,9 @@ class User {
         other.bio == bio &&
         other.city == city &&
         other.state == state &&
-        other.pincode == pincode;
+        other.pincode == pincode &&
+        other.isEmployee == isEmployee &&
+        other.isEmployer == isEmployer;
   }
 
   @override
@@ -101,6 +115,8 @@ class User {
         bio.hashCode ^
         city.hashCode ^
         state.hashCode ^
-        pincode.hashCode;
+        pincode.hashCode ^
+        isEmployee.hashCode ^
+        isEmployer.hashCode;
   }
 }

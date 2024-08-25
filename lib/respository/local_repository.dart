@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalRepository {
-  final String ONBOARDING_DONE = "ONBOARDING_DONE";
+  final String USER_ID = "USER_ID";
 
   late SharedPreferences sharedPreferences;
 
-  Future<bool> isOnBoardingDone() async {
+  Future<int?> getLoggedInUserId() async {
     sharedPreferences = await SharedPreferences.getInstance();
 
-    return sharedPreferences.getBool(ONBOARDING_DONE) ?? false;
+    return sharedPreferences.getInt(USER_ID);
   }
 
   Future<List<dynamic>> getStatesList() async {

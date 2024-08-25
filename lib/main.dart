@@ -1,7 +1,7 @@
 import 'package:bureau_base/resources/style.dart';
+import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/get_started.dart';
 import 'package:bureau_base/screens/home.dart';
-import 'package:bureau_base/components/home_employer.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
 import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/screens/residence.dart';
@@ -13,12 +13,17 @@ import 'package:forui/forui.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+
+  runApp(MyApp(
+    userId: await LocalRepository().getLoggedInUserId(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final int? userId;
   const MyApp({
     super.key,
+    this.userId,
   });
 
   @override
@@ -48,10 +53,13 @@ class MyApp extends StatelessWidget {
         ),
         child: child!,
       ),
-      home: const FScaffold(
+      home: FScaffold(
         contentPad: false,
-        //content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),  //TODO -DO THIS
-        content: HomeScreen(),
+        content: userId == null
+            ? const GetStartedScreen()
+            : HomeScreen(
+                userId: userId!,
+              ),
       ),
     );
   }
@@ -80,11 +88,19 @@ class MyApp extends StatelessWidget {
         );
       case PostDetailsScreen.route:
         return MaterialPageRoute(
-          builder: (context) => const PostDetailsScreen(),
+          builder: (context) => PostDetailsScreen(
+            jobPost: settings.arguments,
+          ),
         );
       case SettingsScreen.route:
         return MaterialPageRoute(
           builder: (context) => const SettingsScreen(),
+        );
+      case HomeScreen.route:
+        return MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            userId: settings.arguments,
+          ),
         );
       default:
         return null;

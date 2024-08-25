@@ -1,5 +1,6 @@
 import 'package:bureau_base/components/carousel_card.dart';
 import 'package:bureau_base/components/spacing.dart';
+import 'package:bureau_base/models/job_post.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/screens/post_details.dart';
@@ -7,8 +8,26 @@ import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-class HomeEmployee extends StatelessWidget {
+class HomeEmployee extends StatefulWidget {
   const HomeEmployee({super.key});
+
+  @override
+  State<HomeEmployee> createState() => _HomeEmployeeState();
+}
+
+class _HomeEmployeeState extends State<HomeEmployee> {
+  late List<JobPost> cityJobs;
+  late List<JobPost> skillJobs;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchJobs();
+  }
+
+  void _fetchJobs() async {
+    //TODO - FETCH JOBS
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +50,23 @@ class HomeEmployee extends StatelessWidget {
                 SizedBox(
                   height: ScreenSize.getPercentOfHeight(context, 0.45),
                   child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: cityJobs.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const Spacing(),
                     itemBuilder: (context, index) {
+                      JobPost jobPost = cityJobs[index];
                       return CarouselCard(
-                        imageUrl:
-                            "https://marketplace.canva.com/EAFioYQ67Mg/1/0/1131w/canva-beige-and-yellow-modern-job-vacancy-we-are-hiring-poster-9ODt6omvLJs.jpg",
-                        title: "Lead Construction Worker",
-                        subtitle: "XYZ Corporate LTD",
-                        postDate: DateTime.now(),
+                        imageUrl: jobPost.image,
+                        title: jobPost.title,
+                        subtitle: jobPost.employer.companyName,
+                        postDate: jobPost.datePosted,
                         onClick: () {
-                          Navigator.pushNamed(context, PostDetailsScreen.route);
+                          Navigator.pushNamed(
+                            context,
+                            PostDetailsScreen.route,
+                            arguments: jobPost,
+                          );
                         },
                       );
                     },
@@ -62,17 +85,22 @@ class HomeEmployee extends StatelessWidget {
           ),
         ),
         ListView.builder(
-          itemCount: 5,
+          itemCount: skillJobs.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
+            JobPost jobPost = cityJobs[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-                title: const Text("Lead Construction Worker"),
-                subtitle: const Text("XYZ Corporate LTD"),
+                title: Text(jobPost.title),
+                subtitle: Text(jobPost.employer.companyName),
                 tileColor: context.theme.cardStyle.decoration.color,
                 onTap: () {
-                  Navigator.pushNamed(context, PostDetailsScreen.route);
+                  Navigator.pushNamed(
+                    context,
+                    PostDetailsScreen.route,
+                    arguments: jobPost,
+                  );
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius:
