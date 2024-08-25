@@ -4,4 +4,5 @@ class Assets {
   static const String verifyOtp = "assets/verify_otp.svg";
   static const String wave1 = "assets/wave1.svg";
   static const String wave2 = "assets/wave2.svg";
+  static const String getStarted = "assets/get_started.svg";
 }

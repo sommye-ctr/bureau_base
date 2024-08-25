@@ -1,6 +1,12 @@
 class Strings {
   static const String proceed = "Proceed";
 
+  ///get started
+  static const String useAppQ = "How do you want to use BuraeuBase?";
+  static const String wantJobs = "I want to find jobs";
+  static const String wantEmployees =
+      "I want to find employees for my organisation";
+
   ///signup
   static const String next = "Next";
   static const String getStarted = "Get Started";

@@ -1,5 +1,5 @@
 import 'package:bureau_base/resources/style.dart';
-import 'package:bureau_base/screens/home.dart';
+import 'package:bureau_base/screens/get_started.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
 import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/screens/residence.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       home: const FScaffold(
         contentPad: false,
         //content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),  //TODO -DO THIS
-        content: HomeScreen(),
+        content: GetStartedScreen(),
       ),
     );
   }
@@ -58,7 +58,9 @@ class MyApp extends StatelessWidget {
     switch (settings.name) {
       case SignupScreen.route:
         return MaterialPageRoute(
-          builder: (context) => const SignupScreen(),
+          builder: (context) => SignupScreen(
+            isEmployer: settings.arguments,
+          ),
         );
       case OtpVerificationScreen.route:
         return MaterialPageRoute(

@@ -9,7 +9,8 @@ import 'package:forui/forui.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String route = "/signup";
-  const SignupScreen({super.key});
+  final bool isEmployer;
+  const SignupScreen({required this.isEmployer, super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -54,57 +55,59 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SvgPicture.asset(
-            Assets.welcome,
-            width: double.infinity,
-            height: ScreenSize.getPercentOfHeight(
-              context,
-              0.4,
-            ),
-          ),
-          const Spacing(
-            large: true,
-          ),
-          Text(
-            Strings.getStarted,
-            style: context.theme.typography.xl4,
-          ),
-          Text(
-            Strings.enterMobileToProceed,
-            style: context.theme.typography.sm,
-          ),
-          const Spacing(
-            large: true,
-          ),
-          FTextField(
-            enabled: true,
-            label: const Text(Strings.mobileNo),
-            hint: Strings.mobileHint,
-            keyboardType: TextInputType.phone,
-            maxLength: 10,
-            controller: _controller,
-            error: _validated ? null : const Text(Strings.mobileNumberError),
-          ),
-          const Spacing(
-            large: true,
-          ),
-          Hero(
-            tag: Strings.proceed,
-            child: Center(
-              child: FButton(
-                label: const Text(Strings.proceed),
-                onPress: () {
-                  _proceed();
-                },
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SvgPicture.asset(
+              Assets.welcome,
+              width: double.infinity,
+              height: ScreenSize.getPercentOfHeight(
+                context,
+                0.4,
               ),
             ),
-          )
-        ],
+            const Spacing(
+              large: true,
+            ),
+            Text(
+              Strings.getStarted,
+              style: context.theme.typography.xl4,
+            ),
+            Text(
+              Strings.enterMobileToProceed,
+              style: context.theme.typography.sm,
+            ),
+            const Spacing(
+              large: true,
+            ),
+            FTextField(
+              enabled: true,
+              label: const Text(Strings.mobileNo),
+              hint: Strings.mobileHint,
+              keyboardType: TextInputType.phone,
+              maxLength: 10,
+              controller: _controller,
+              error: _validated ? null : const Text(Strings.mobileNumberError),
+            ),
+            const Spacing(
+              large: true,
+            ),
+            Hero(
+              tag: Strings.proceed,
+              child: Center(
+                child: FButton(
+                  label: const Text(Strings.proceed),
+                  onPress: () {
+                    _proceed();
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
