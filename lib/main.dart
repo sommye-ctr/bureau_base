@@ -1,5 +1,5 @@
 import 'package:bureau_base/resources/style.dart';
-import 'package:bureau_base/respository/local_repository.dart';
+import 'package:bureau_base/screens/home.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
 import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/screens/residence.dart';
@@ -10,19 +10,12 @@ import 'package:forui/forui.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  bool onBoarding = await LocalRepository().isOnBoardingDone();
-
-  runApp(MyApp(
-    onBoardingDone: onBoarding,
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final bool onBoardingDone;
   const MyApp({
     super.key,
-    this.onBoardingDone = false,
   });
 
   @override
@@ -55,7 +48,7 @@ class MyApp extends StatelessWidget {
       home: const FScaffold(
         contentPad: false,
         //content: onBoardingDone ? const HomeScreen() : const OnBoardScreen(),  //TODO -DO THIS
-        content: ResidenceInfoScreen(),
+        content: HomeScreen(),
       ),
     );
   }

@@ -1,5 +1,6 @@
+import 'package:bureau_base/components/rounded_image.dart';
+import 'package:bureau_base/resources/constants.dart';
 import 'package:bureau_base/utils/screen_size.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -48,10 +49,10 @@ class CarouselCard extends StatelessWidget {
             ),
           ),
           subtitle: Text(subtitle),
-          image: CachedNetworkImage(
-            imageUrl: imageUrl,
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+          image: RoundedImage(
+            image: imageUrl,
             width: ScreenSize.getPercentOfWidth(context, 0.4),
+            ratio: Constants.postImageRatio,
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 8),
