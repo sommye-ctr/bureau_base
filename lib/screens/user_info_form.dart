@@ -142,7 +142,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         return;
                       }
                       if (userDob == null) {
-                        //TODO DO HERE
+                        Style.showToast(
+                            context: context, text: "Enter your Date of Birth");
                       }
                     },
                   ),
