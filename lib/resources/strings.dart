@@ -29,4 +29,13 @@ class Strings {
       "First Name must have atleast 2 characters";
   static const String lastNameError =
       "Last Name must have atleast 2 characters";
+
+  /// Home
+  static const String popularJobsIn = "Popular Jobs in ";
+  static const String jobsForYou = "Jobs for You";
+
+  ///Post details
+  static const String markAsInterested = "Mark as Interested";
+  static const String aboutEmployer = "About Employer";
+  static const String description = "Description";
 }

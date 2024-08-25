@@ -1,6 +1,7 @@
 import 'package:bureau_base/components/rounded_image.dart';
 import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/constants.dart';
+import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -18,7 +19,7 @@ class PostDetailsScreen extends StatelessWidget {
           child: FButton(
             onPress: () {},
             label: const Text(
-              "Mark as interested",
+              Strings.markAsInterested,
             ),
           ),
         ),
@@ -93,12 +94,12 @@ class PostDetailsScreen extends StatelessWidget {
             ),
             const Spacing(large: true),
             FCard(
-              title: const Text("Description"),
+              title: const Text(Strings.description),
               subtitle: Text("Lorem Ipsum " * 45),
             ),
             const Spacing(large: true),
             FCard(
-              title: Text("About Employer"),
+              title: const Text(Strings.aboutEmployer),
               subtitle: Text(
                 "Name - Somye Mahajan\nCompany - Stark Industries\nAddress - XYZ Road, abc street, pqr city, India\nMobile - 4543454534",
               ),

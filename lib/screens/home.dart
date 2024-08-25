@@ -1,5 +1,6 @@
 import 'package:bureau_base/components/carousel_card.dart';
 import 'package:bureau_base/components/spacing.dart';
+import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/utils/screen_size.dart';
@@ -49,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Popular jobs in Roorkee",
+                      Strings.popularJobsIn,
                       style: context.theme.typography.lg,
                     ),
                     const Spacing(),
@@ -83,7 +84,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
-                "Jobs for your skills",
+                Strings.jobsForYou,
                 style: context.theme.typography.xl2,
               ),
             ),
