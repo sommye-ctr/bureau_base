@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
         );
       case ResidenceInfoScreen.route:
         return MaterialPageRoute(
-          builder: (context) => const ResidenceInfoScreen(),
+          builder: (context) => ResidenceInfoScreen(),
         );
       default:
         return null;
