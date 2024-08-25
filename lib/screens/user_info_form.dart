@@ -18,7 +18,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   DateTime? userDob;
-  String gender = "Male";
+  String gender = Strings.male;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +47,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         label: const Text(Strings.firstName),
                         hint: Strings.lorem,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.name,
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
@@ -65,6 +66,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         label: const Text(Strings.lastName),
                         hint: Strings.ipsum,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.name,
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
@@ -95,13 +97,13 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   onPress: (index) {
                     switch (index) {
                       case 0:
-                        gender = "Male";
+                        gender = Strings.male;
                         break;
                       case 1:
-                        gender = "Female";
+                        gender = Strings.female;
                         break;
                       case 2:
-                        gender = "Others";
+                        gender = Strings.others;
                       default:
                     }
                   },
@@ -128,19 +130,22 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 const Spacing(
                   large: true,
                 ),
-                FButton(
-                  label: const Text(Strings.proceed),
-                  onPress: () {
-                    if (_formKey.currentState != null &&
-                        _formKey.currentState!.validate() &&
-                        userDob != null) {
-                      Navigator.pushNamed(context, ResidenceInfoScreen.route);
-                      return;
-                    }
-                    if (userDob == null) {
-                      //TODO DO HERE
-                    }
-                  },
+                Hero(
+                  tag: Strings.proceed,
+                  child: FButton(
+                    label: const Text(Strings.proceed),
+                    onPress: () {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate() &&
+                          userDob != null) {
+                        Navigator.pushNamed(context, ResidenceInfoScreen.route);
+                        return;
+                      }
+                      if (userDob == null) {
+                        //TODO DO HERE
+                      }
+                    },
+                  ),
                 )
               ],
             ),
