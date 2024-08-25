@@ -42,6 +42,7 @@ class Strings {
   /// Home
   static const String popularJobsIn = "Popular Jobs in ";
   static const String jobsForYou = "Jobs for You";
+  static const String yourJobPosts = "Your Job Posts";
 
   ///Post details
   static const String markAsInterested = "Mark as Interested";
