@@ -49,7 +49,10 @@ class _SignupScreenState extends State<SignupScreen> {
     Navigator.pushNamed(
       context,
       OtpVerificationScreen.route,
-      arguments: _controller.text,
+      arguments: {
+        "email": _controller.text,
+        "isEmployer": widget.isEmployer,
+      },
     );
   }
 

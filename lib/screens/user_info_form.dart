@@ -8,7 +8,9 @@ import 'package:forui/forui.dart';
 
 class UserInfoScreen extends StatefulWidget {
   static const String route = "/user-info-form";
-  const UserInfoScreen({super.key});
+
+  final bool isEmployer;
+  const UserInfoScreen({required this.isEmployer, super.key});
 
   @override
   State<UserInfoScreen> createState() => _UserInfoScreenState();

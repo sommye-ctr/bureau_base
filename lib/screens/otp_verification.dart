@@ -15,8 +15,10 @@ import 'package:forui/forui.dart';
 class OtpVerificationScreen extends StatefulWidget {
   static const String route = "/otp-verify";
 
-  final String phone;
-  const OtpVerificationScreen({required this.phone, super.key});
+  final String email;
+  final bool isEmployer;
+  const OtpVerificationScreen(
+      {required this.email, required this.isEmployer, super.key});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -47,7 +49,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void onProceed() {
-    if (otp == null) return;
+    if (otp == null || otp!.isEmpty) return;
     // Style.showLoadingDialog(context: context);
     /* try {
       //Auth.verifyOtp(otp!, widget.phone);
@@ -60,6 +62,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
     Style.dismisLoadingDialog(context: context); */
     //Navigator.pushNamed(context, UserInfoScreen.route);
+    Navigator.pushNamed(context, UserInfoScreen.route,
+        arguments: widget.isEmployer);
   }
 
   @override
@@ -129,8 +133,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           child: FButton(
                             label: const Text(Strings.proceed),
                             onPress: () {
-                              Navigator.pushNamed(
-                                  context, UserInfoScreen.route);
+                              onProceed();
                             },
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
+import 'package:bureau_base/screens/home.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -9,7 +10,9 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 
 class ResidenceInfoScreen extends StatefulWidget {
   static const String route = "/residence-info";
-  const ResidenceInfoScreen({super.key});
+
+  final bool isEmployer;
+  const ResidenceInfoScreen({required this.isEmployer, super.key});
 
   @override
   State<ResidenceInfoScreen> createState() => _ResidenceInfoScreenState();
@@ -22,7 +25,9 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
   String? selectedState;
   String? selectedCity;
 
+  final MultiSelectController<String> _controller = MultiSelectController();
   final GlobalKey<FormFieldState> _cityKey = GlobalKey();
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -88,16 +93,30 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
           const FDivider(),
           _buildIndustryDropDown(),
           const Spacing(large: true),
-          const FTextField(
+          FTextField(
             hint: Strings.yearsOfExperience,
             keyboardType: TextInputType.number,
+            controller: _textEditingController,
           ),
           const Spacing(large: true),
           Hero(
             tag: Strings.proceed,
             child: FButton(
               label: const Text(Strings.proceed),
-              onPress: () {},
+              onPress: () {
+                if (selectedCity == null ||
+                    selectedState == null ||
+                    _controller.selectedItems.isEmpty ||
+                    _textEditingController.text.isEmpty) {
+                  Style.showToast(
+                    context: context,
+                    text: "Kindly fill all the fields",
+                  );
+                  return;
+                }
+                Navigator.pushNamed(context, HomeScreen.route,
+                    arguments: 1); //TODO - PUT USER ID HERE
+              },
             ),
           ),
         ],
@@ -119,6 +138,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
       chipDecoration: const ChipDecoration(backgroundColor: Style.primaryColor),
       searchEnabled: true,
       fieldDecoration: const FieldDecoration(hintText: "Select your industry"),
+      controller: _controller,
     );
   }
 

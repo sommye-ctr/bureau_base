@@ -75,16 +75,21 @@ class MyApp extends StatelessWidget {
       case OtpVerificationScreen.route:
         return MaterialPageRoute(
           builder: (context) => OtpVerificationScreen(
-            phone: settings.arguments,
+            email: settings.arguments['email'],
+            isEmployer: settings.arguments['isEmployer'],
           ),
         );
       case UserInfoScreen.route:
         return MaterialPageRoute(
-          builder: (context) => const UserInfoScreen(),
+          builder: (context) => UserInfoScreen(
+            isEmployer: settings.arguments,
+          ),
         );
       case ResidenceInfoScreen.route:
         return MaterialPageRoute(
-          builder: (context) => const ResidenceInfoScreen(),
+          builder: (context) => ResidenceInfoScreen(
+            isEmployer: settings.arguments,
+          ),
         );
       case PostDetailsScreen.route:
         return MaterialPageRoute(
