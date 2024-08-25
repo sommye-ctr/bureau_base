@@ -3,6 +3,7 @@ import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/screens/post_details.dart';
+import 'package:bureau_base/screens/settings.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -37,7 +38,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  IconButton(onPressed: () {}, icon: FAssets.icons.settings())
+                  IconButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, SettingsScreen.route),
+                      icon: FAssets.icons.settings())
                 ],
               ),
             ),
