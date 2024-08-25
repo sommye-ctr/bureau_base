@@ -5,6 +5,7 @@ import 'package:bureau_base/respository/local_repository.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 
 class ResidenceInfoScreen extends StatefulWidget {
   static const String route = "/residence-info";
@@ -51,7 +52,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
         children: [
           Center(
             child: Text(
-              "Just one last step",
+              Strings.lastStep,
               style: context.theme.typography.xl4,
             ),
           ),
@@ -59,8 +60,8 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
             large: true,
           ),
           _buildDropDown(
-            "Select your state",
-            "Enter your state",
+            Strings.selectState,
+            Strings.selectState,
             (value) {
               selectedState = value;
               _fetchCities();
@@ -72,11 +73,25 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
             states,
           ),
           const Spacing(),
-          _buildDropDown("Select your city", "Enter your city", (value) {
-            selectedCity = value;
-          }, (value) {
-            selectedCity = value;
-          }, cities, key: _cityKey),
+          _buildDropDown(
+            Strings.selectCity,
+            Strings.selectCity,
+            (value) {
+              selectedCity = value;
+            },
+            (value) {
+              selectedCity = value;
+            },
+            cities,
+            key: _cityKey,
+          ),
+          const FDivider(),
+          _buildSkillsDropDown(),
+          const Spacing(large: true),
+          const FTextField(
+            hint: Strings.yearsOfExperience,
+            keyboardType: TextInputType.number,
+          ),
           const Spacing(large: true),
           Hero(
             tag: Strings.proceed,
@@ -84,9 +99,25 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
               label: const Text(Strings.proceed),
               onPress: () {},
             ),
-          )
+          ),
         ],
       )),
+    );
+  }
+
+  Widget _buildSkillsDropDown() {
+    final List<String> items = [
+      "Plumbing",
+      "Carpentry",
+      "Orchestra"
+    ]; //TODO CHANGE THIS
+
+    return MultiDropdown<String>(
+      items: items.map((e) => DropdownItem(label: e, value: e)).toList(),
+      enabled: true,
+      singleSelect: false,
+      chipDecoration: const ChipDecoration(backgroundColor: Style.primaryColor),
+      searchEnabled: true,
     );
   }
 
@@ -95,7 +126,7 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
     String validatorMessage,
     Function(dynamic) onChanged,
     Function(dynamic) onSaved,
-    List<dynamic> items, {
+    List items, {
     GlobalKey? key,
   }) {
     return DropdownButtonFormField2<String>(

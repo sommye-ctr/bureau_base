@@ -30,6 +30,11 @@ class Strings {
   static const String lastNameError =
       "Last Name must have atleast 2 characters";
 
+  static const String selectState = "Select your state";
+  static const String selectCity = "Select your city";
+  static const String lastStep = "Just one last step";
+  static const String yearsOfExperience = "Years of experience";
+
   /// Home
   static const String popularJobsIn = "Popular Jobs in ";
   static const String jobsForYou = "Jobs for You";
