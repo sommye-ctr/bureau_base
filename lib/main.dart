@@ -2,6 +2,7 @@ import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/home.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
+import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/screens/residence.dart';
 import 'package:bureau_base/screens/signup.dart';
 import 'package:bureau_base/screens/user_info_form.dart';
@@ -78,7 +79,11 @@ class MyApp extends StatelessWidget {
         );
       case ResidenceInfoScreen.route:
         return MaterialPageRoute(
-          builder: (context) => ResidenceInfoScreen(),
+          builder: (context) => const ResidenceInfoScreen(),
+        );
+      case PostDetailsScreen.route:
+        return MaterialPageRoute(
+          builder: (context) => const PostDetailsScreen(),
         );
       default:
         return null;

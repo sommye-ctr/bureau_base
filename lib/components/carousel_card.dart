@@ -23,36 +23,42 @@ class CarouselCard extends StatelessWidget {
   final String subtitle;
   final String imageUrl;
   final DateTime postDate;
+
+  final void Function()? onClick;
   CarouselCard({
     required this.title,
     required this.subtitle,
     required this.imageUrl,
     required this.postDate,
+    this.onClick,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: ScreenSize.getPercentOfWidth(context, 0.55),
-      child: FCard(
-        title: Text(
-          title,
-          style: const TextStyle(
-            overflow: TextOverflow.ellipsis,
+    return InkWell(
+      onTap: onClick,
+      child: SizedBox(
+        width: ScreenSize.getPercentOfWidth(context, 0.55),
+        child: FCard(
+          title: Text(
+            title,
+            style: const TextStyle(
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-        subtitle: Text(subtitle),
-        image: CachedNetworkImage(
-          imageUrl: imageUrl,
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          width: ScreenSize.getPercentOfWidth(context, 0.4),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Text(
-            "Posted on ${postDate.day} ${months[postDate.month - 1]}",
-            style: context.theme.typography.sm,
+          subtitle: Text(subtitle),
+          image: CachedNetworkImage(
+            imageUrl: imageUrl,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            width: ScreenSize.getPercentOfWidth(context, 0.4),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              "Posted on ${postDate.day} ${months[postDate.month - 1]}",
+              style: context.theme.typography.sm,
+            ),
           ),
         ),
       ),

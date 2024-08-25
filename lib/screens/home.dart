@@ -1,6 +1,7 @@
 import 'package:bureau_base/components/carousel_card.dart';
 import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/style.dart';
+import 'package:bureau_base/screens/post_details.dart';
 import 'package:bureau_base/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
@@ -66,6 +67,10 @@ class HomeScreen extends StatelessWidget {
                             title: "Lead Construction Worker",
                             subtitle: "XYZ Corporate LTD",
                             postDate: DateTime.now(),
+                            onClick: () {
+                              Navigator.pushNamed(
+                                  context, PostDetailsScreen.route);
+                            },
                           );
                         },
                       ),
@@ -92,6 +97,9 @@ class HomeScreen extends StatelessWidget {
                     title: const Text("Lead Construction Worker"),
                     subtitle: const Text("XYZ Corporate LTD"),
                     tileColor: context.theme.cardStyle.decoration.color,
+                    onTap: () {
+                      Navigator.pushNamed(context, PostDetailsScreen.route);
+                    },
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(Style.smallRoundEdgeRadius),
