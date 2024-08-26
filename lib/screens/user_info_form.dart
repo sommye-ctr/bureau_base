@@ -19,6 +19,9 @@ class UserInfoScreen extends StatefulWidget {
 class _UserInfoScreenState extends State<UserInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
   DateTime? userDob;
   String gender = Strings.male;
 
@@ -47,6 +50,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       child: FTextField(
                         enabled: true,
                         label: const Text(Strings.firstName),
+                        controller: _firstNameController,
                         hint: Strings.lorem,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.name,
@@ -66,6 +70,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       child: FTextField(
                         enabled: true,
                         label: const Text(Strings.lastName),
+                        controller: _lastNameController,
                         hint: Strings.ipsum,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.name,
@@ -140,7 +145,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate() &&
                           userDob != null) {
-                        Navigator.pushNamed(context, ResidenceInfoScreen.route);
+                        Navigator.pushNamed(context, ResidenceInfoScreen.route,
+                            arguments: {
+                              "isEmployer": widget.isEmployer,
+                              "firstName": _firstNameController.value,
+                              "lastName": _lastNameController.value,
+                              "dob": userDob,
+                              "gender": gender,
+                            });
                         return;
                       }
                       if (userDob == null) {

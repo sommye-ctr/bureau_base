@@ -67,10 +67,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    IconButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, SettingsScreen.route),
-                      icon: FAssets.icons.settings(),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, SettingsScreen.route),
+                          icon: FAssets.icons.settings(),
+                        ),
+                        const Spacing(),
+                        IconButton(
+                            onPressed: () {}, icon: FAssets.icons.logOut()),
+                      ],
                     )
                   ],
                 ),

@@ -12,7 +12,17 @@ class ResidenceInfoScreen extends StatefulWidget {
   static const String route = "/residence-info";
 
   final bool isEmployer;
-  const ResidenceInfoScreen({required this.isEmployer, super.key});
+  final String firstName;
+  final String lastName;
+  final DateTime dob;
+  final String gender;
+  const ResidenceInfoScreen(
+      {required this.isEmployer,
+      required this.gender,
+      required this.firstName,
+      required this.lastName,
+      required this.dob,
+      super.key});
 
   @override
   State<ResidenceInfoScreen> createState() => _ResidenceInfoScreenState();
@@ -114,6 +124,8 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
                   );
                   return;
                 }
+                Style.showLoadingDialog(context: context);
+
                 Navigator.pushNamed(context, HomeScreen.route,
                     arguments: 1); //TODO - PUT USER ID HERE
               },

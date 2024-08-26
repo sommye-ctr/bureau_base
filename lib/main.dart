@@ -9,10 +9,19 @@ import 'package:bureau_base/screens/settings.dart';
 import 'package:bureau_base/screens/signup.dart';
 import 'package:bureau_base/screens/user_info_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:forui/forui.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: "lib/.env");
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL'] ?? "",
+    anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? "",
+  );
 
   runApp(MyApp(
     userId: await LocalRepository().getLoggedInUserId(),
@@ -86,9 +95,14 @@ class MyApp extends StatelessWidget {
           ),
         );
       case ResidenceInfoScreen.route:
+        dynamic object = settings.arguments;
         return MaterialPageRoute(
           builder: (context) => ResidenceInfoScreen(
-            isEmployer: settings.arguments,
+            isEmployer: object['isEmployer'],
+            dob: object['dob'],
+            firstName: object['firstName'],
+            lastName: object['lastName'],
+            gender: object['gender'],
           ),
         );
       case PostDetailsScreen.route:
