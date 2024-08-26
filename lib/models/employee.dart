@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:bureau_base/models/industry.dart';
 import 'package:bureau_base/models/skills.dart';
 import 'package:bureau_base/models/user.dart';
+import 'package:flutter/services.dart';
 
 class Employee {
   final User user;
@@ -42,9 +43,18 @@ class Employee {
   }
 
   Map<String, dynamic> toMap() {
+    String updatedGender;
+
+    if (gender == "Male") {
+      updatedGender = "M";
+    } else if (gender == "Female") {
+      updatedGender = "F";
+    } else {
+      updatedGender = "O";
+    }
     return {
       'user': user.toMap(),
-      'gender': gender,
+      'gender': updatedGender,
       'dob': dob.millisecondsSinceEpoch,
       'qualification': qualification,
       'workExperience': workExperience,
