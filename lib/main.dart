@@ -1,5 +1,6 @@
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
+import 'package:bureau_base/screens/create_post.dart';
 import 'package:bureau_base/screens/get_started.dart';
 import 'package:bureau_base/screens/home.dart';
 import 'package:bureau_base/screens/otp_verification.dart';
@@ -55,11 +56,12 @@ class MyApp extends StatelessWidget {
       ),
       home: FScaffold(
         contentPad: false,
-        content: userId == null
+        /* content: userId == null
             ? const GetStartedScreen()
             : HomeScreen(
                 userId: userId!,
-              ),
+              ), */
+        content: CreatePostScreen(),
       ),
     );
   }

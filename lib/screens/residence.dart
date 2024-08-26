@@ -1,9 +1,9 @@
+import 'package:bureau_base/components/residence_dropdown.dart';
 import 'package:bureau_base/components/spacing.dart';
 import 'package:bureau_base/resources/strings.dart';
 import 'package:bureau_base/resources/style.dart';
 import 'package:bureau_base/respository/local_repository.dart';
 import 'package:bureau_base/screens/home.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
@@ -64,30 +64,30 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
           const Spacing(
             large: true,
           ),
-          _buildDropDown(
-            Strings.selectState,
-            Strings.selectState,
-            (value) {
+          ResidenceDropdown(
+            heading: Strings.selectState,
+            validatorMessage: Strings.selectState,
+            onChanged: (value) {
               selectedState = value;
               _fetchCities();
             },
-            (value) {
+            onSaved: (value) {
               selectedState = value;
               _fetchCities();
             },
-            states,
+            items: states,
           ),
           const Spacing(),
-          _buildDropDown(
-            Strings.selectCity,
-            Strings.selectCity,
-            (value) {
+          ResidenceDropdown(
+            heading: Strings.selectCity,
+            validatorMessage: Strings.selectCity,
+            onChanged: (value) {
               selectedCity = value;
             },
-            (value) {
+            onSaved: (value) {
               selectedCity = value;
             },
-            cities,
+            items: cities,
             key: _cityKey,
           ),
           const FDivider(),
@@ -139,54 +139,6 @@ class _ResidenceInfoScreenState extends State<ResidenceInfoScreen> {
       searchEnabled: true,
       fieldDecoration: const FieldDecoration(hintText: "Select your industry"),
       controller: _controller,
-    );
-  }
-
-  Widget _buildDropDown(
-    String heading,
-    String validatorMessage,
-    Function(dynamic) onChanged,
-    Function(dynamic) onSaved,
-    List items, {
-    GlobalKey? key,
-  }) {
-    return DropdownButtonFormField2<String>(
-      key: key,
-      isExpanded: true,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 16),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-      hint: Text(
-        heading,
-      ),
-      items: items
-          .map((item) => DropdownMenuItem<String>(
-                value: item,
-                child: Text(item),
-              ))
-          .toList(),
-      validator: (value) {
-        if (value == null) {
-          return validatorMessage;
-        }
-        return null;
-      },
-      onChanged: onChanged,
-      onSaved: onSaved,
-      buttonStyleData: const ButtonStyleData(
-        padding: EdgeInsets.only(right: 8),
-      ),
-      dropdownStyleData: DropdownStyleData(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Style.largeRoundEdgeRadius),
-        ),
-      ),
-      menuItemStyleData: const MenuItemStyleData(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-      ),
     );
   }
 }
